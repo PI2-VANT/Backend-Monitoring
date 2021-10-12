@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3.9-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+  backend_monitoring:
+    build: .
+    container_name: backend_monitoring
+    ports:
+      - 8001:3000
+    volumes:
+      - ./:/code
+    depends_on:
+      - rabbitmq
+
+
