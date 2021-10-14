@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+  backend_monitoring:
+    build: .
+    container_name: backend_monitoring
+    ports:
+      - 8082:3000
+    env_file: .env
+    volumes:
+      - ./:/code
+
+
