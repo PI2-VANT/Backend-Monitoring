@@ -5,9 +5,14 @@ services:
     build: .
     container_name: backend_monitoring
     ports:
-      - ${APPLICATION_PORT}:3000
+      - ${APPLICATION_PORT}:${APPLICATION_PORT}
     env_file: .env
+    networks:
+      - vant-network
     volumes:
       - ./:/code
 
-
+networks:
+  vant-network:
+    name: vant-network
+    driver: bridge
