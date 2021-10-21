@@ -1,6 +1,27 @@
-version: '3.3'
+version: '3.8'
 
 services:
+  redis:
+    container_name: redis
+    image: docker.io/bitnami/redis:6.2
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    networks:
+      - vant-network
+    ports:
+      - '6379:6379'
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3.9-management
+    networks:
+      - vant-network
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
   backend_monitoring:
     build: .
     container_name: backend_monitoring
@@ -11,8 +32,11 @@ services:
       - vant-network
     volumes:
       - ./:/code
+    depends_on:
+      - rabbitmq
 
 networks:
   vant-network:
     name: vant-network
     driver: bridge
+
