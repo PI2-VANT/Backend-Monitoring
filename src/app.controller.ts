@@ -60,7 +60,10 @@ export class AppController {
     };
 
     const response = await this.httpService
-      .post(`http://backend_vant:8081/vant/fly-data/002`, dataVant)
+      .post(
+        `http://backend_vant:8081/vant/fly-data/${dataVant.registrationCode}`,
+        dataVant,
+      )
       .toPromise();
     console.log(response.data);
   }

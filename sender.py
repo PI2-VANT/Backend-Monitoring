@@ -26,7 +26,7 @@ for i in range(1, 10):
   p = bateria 
   now = datetime.now()
   d = now.strftime("%d-%m-%Y:T%H:%M:%S")
-  y = '"registrationCode": "002", "flyCode": 1, "velocidade": {0}, "temperatura": {1}, "umidade": {2}, "bateria": {3}, "pesticida":{4}, "latitude":"80.00123","longitude":"90.00123", "date":"{5}"'.format(v,t,u,bateria,p,d)
+  y = '"registrationCode": "oo2x", "flyCode": 1, "velocidade": {0}, "temperatura": {1}, "umidade": {2}, "bateria": {3}, "pesticida":{4}, "latitude":"80.00123","longitude":"90.00123", "date":"{5}"'.format(v,t,u,bateria,p,d)
   
   x =  '{ "data": {'+ str(y)+'} }'
   channel.basic_publish(exchange='', routing_key='vant', body=x)
